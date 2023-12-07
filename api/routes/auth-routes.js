@@ -12,7 +12,7 @@ router.get("/logout", (req, res, next) => {
     if (err) {
       return next(err)
     }
-    res.redirect("http://localhost:5173/")
+    res.json({ message: "Successfully logged out." })
   })
 })
 
