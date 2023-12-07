@@ -28,17 +28,9 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.set("view engine", "ejs")
-
 // set up routes
 app.use("/auth", authRoutes)
 app.use("/user", userRoutes)
-
-// create home route
-app.get("/", (req, res) => {
-  console.log("req.user: " + JSON.stringify(req.user))
-  res.render("home", { user: req.user })
-})
 
 app.listen(3000, () => {
   console.log("app listening on port 3000!")
