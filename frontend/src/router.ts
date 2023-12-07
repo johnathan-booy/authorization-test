@@ -6,8 +6,15 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "Home",
     component: Home
-  }
+  },
   // Add more routes here
+
+  // Catch-all route goes Home
+  // This must be last
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/"
+  }
 ]
 
 const router = createRouter({
