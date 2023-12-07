@@ -4,12 +4,7 @@
 
 <style>
 :root {
-  background-color: #333;
-  color: #f4f4f4;
   margin: 0;
-  min-height: 100vh;
-  width: 100%;
-  padding: 0;
 }
 
 * {
