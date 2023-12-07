@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
 import Home from "@/views/Home.vue" // Your home page component
+import Login from "@/views/Login.vue" // Your login page component
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -7,6 +8,12 @@ const routes: Array<RouteRecordRaw> = [
     name: "Home",
     component: Home
   },
+  {
+    path: "/auth/login",
+    name: "Login",
+    component: Login
+  },
+
   // Add more routes here
 
   // Catch-all route goes Home
