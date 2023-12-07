@@ -2,7 +2,7 @@
   <nav>
     <ul>
       <li><a href="/auth/login">Login</a></li>
-      <li><a href="/auth/logout">Logout</a></li>
+      <li><a href="http://localhost:3000/auth/logout">Logout</a></li>
       <li><a href="/">Home</a></li>
       <li><a href="/profile">Profile</a></li>
     </ul>

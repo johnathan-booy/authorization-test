@@ -1,10 +1,8 @@
-const authCheck = (req, res, next) => {
-  if (!req.user) {
-    // if user is not logged in
-    res.redirect("/auth/login")
-  } else {
-    // if logged in
+function authCheck(req, res, next) {
+  if (req.isAuthenticated()) {
     next()
+  } else {
+    res.status(401).json({ message: "Not authenticated" })
   }
 }
 

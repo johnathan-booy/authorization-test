@@ -18,7 +18,6 @@ export const useAuthStore = defineStore({
         const response = await axios.get<{ user: User }>("http://localhost:3000/user", { withCredentials: true })
         this.user = response.data.user
       } catch (error) {
-        console.error("Error fetching user data:", error)
         this.user = null
       }
     },
