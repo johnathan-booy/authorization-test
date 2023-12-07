@@ -1,6 +1,19 @@
 <template>
+  <span>{{ user }}</span>
   <router-view></router-view>
 </template>
+
+<script lang="ts" setup>
+import { useAuthStore } from "@/stores/authStore"
+import { onMounted } from "vue"
+const authStore = useAuthStore()
+
+const user = authStore.user
+
+onMounted(() => {
+  authStore.fetchUser()
+})
+</script>
 
 <style>
 :root {

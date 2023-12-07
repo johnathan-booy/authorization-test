@@ -22,19 +22,23 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
     async (accessToken, refreshToken, profile, done) => {
-      // check if user already exists in our own db
-      const currentUser = await User.findByGoogleId(profile.id)
-      console.log("currentUser: " + JSON.stringify(currentUser))
-      done(null, currentUser)
+      try {
+        let user = await User.findByGoogleId(profile.id)
 
-      // create new user in our db
-      if (!currentUser) {
-        const newUser = await User.create({
-          google_id: profile.id,
-          username: profile.displayName
-        })
-        console.log("newUser: " + JSON.stringify(newUser))
-        done(null, newUser)
+        if (!user) {
+          // Create new user if not found
+          user = await User.create({
+            google_id: profile.id,
+            username: profile.displayName
+          })
+          console.log("New user created: " + JSON.stringify(user))
+        } else {
+          console.log("Existing user: " + JSON.stringify(user))
+        }
+
+        done(null, user)
+      } catch (error) {
+        done(error)
       }
     }
   )

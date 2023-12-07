@@ -1,7 +1,8 @@
 require("dotenv").config()
+const cors = require("cors")
 const express = require("express")
 const authRoutes = require("./routes/auth-routes")
-const profileRoutes = require("./routes/profile-routes")
+const userRoutes = require("./routes/user-routes")
 const passportSetup = require("./config/passport-setup")
 const passport = require("passport")
 const session = require("express-session")
@@ -9,8 +10,15 @@ const session = require("express-session")
 const app = express()
 
 app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true
+  })
+)
+
+app.use(
   session({
-    secret: process.env.SESSION_SECRET, // Set this in your .env file
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 24 * 60 * 60 * 1000 }
@@ -24,7 +32,7 @@ app.set("view engine", "ejs")
 
 // set up routes
 app.use("/auth", authRoutes)
-app.use("/profile", profileRoutes)
+app.use("/user", userRoutes)
 
 // create home route
 app.get("/", (req, res) => {
