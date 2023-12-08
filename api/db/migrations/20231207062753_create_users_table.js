@@ -3,6 +3,7 @@ exports.up = function (knex) {
     table.increments("id").primary()
     table.string("google_id")
     table.string("username")
+    table.timestamp("created_at").defaultTo(knex.fn.now())
   })
 }
 

@@ -17,6 +17,12 @@ class User {
     return result[0] || null
   }
 
+  static async findByLinkedInId(linkedinId) {
+    if (!linkedinId) return null
+    const result = await knex("users").select("*").where({ linkedin_id: linkedinId })
+    return result[0] || null
+  }
+
   static async create(newUser) {
     if (!newUser) return null
     const result = await knex("users").insert(newUser).returning("*")

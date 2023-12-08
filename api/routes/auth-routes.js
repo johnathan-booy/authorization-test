@@ -19,4 +19,16 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   res.redirect("http://localhost:5173/profile")
 })
 
+// auth with linkedin
+router.get("/linkedin", passport.authenticate("linkedin"))
+
+// callback route for linkedin to redirect to
+router.get(
+  "/linkedin/redirect",
+  passport.authenticate("linkedin", {
+    successRedirect: "http://localhost:5173/profile",
+    failureRedirect: "http://localhost:5173/auth/login"
+  })
+)
+
 module.exports = router

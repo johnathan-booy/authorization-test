@@ -5,6 +5,8 @@ interface User {
   id: string
   username: string
   google_id: string
+  linkedin_id: string
+  created_at: string
 }
 
 export const useAuthStore = defineStore({

@@ -5,12 +5,21 @@
       <h1>Login using...</h1>
     </div>
     <div class="content">
-      <a
-        class="google-btn"
-        href="http://localhost:3000/auth/google"
-      >
-        Google+
-      </a>
+      <div class="oauth-links">
+        <a
+          class="google-btn"
+          href="http://localhost:3000/auth/google"
+        >
+          Google+
+        </a>
+
+        <a
+          class="linkedin-btn"
+          href="http://localhost:3000/auth/linkedin"
+        >
+          LinkedIn
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -43,9 +52,27 @@ h1 {
   text-align: center;
 }
 
+.oauth-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .google-btn {
   display: inline-block;
   background-color: #dd4b39;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.linkedin-btn {
+  display: inline-block;
+  background-color: #0077b5;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;

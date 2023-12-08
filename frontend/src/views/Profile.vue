@@ -7,6 +7,18 @@
 
     <div class="content">
       <p>More information about {{ authStore.user?.username }} here!</p>
+      <p
+        class="google-info"
+        v-if="authStore.user?.google_id"
+      >
+        Google ID: {{ authStore.user?.google_id }}
+      </p>
+      <p
+        class="linkedin-info"
+        v-if="authStore.user?.linkedin_id"
+      >
+        LinkedIn ID: {{ authStore.user?.linkedin_id }}
+      </p>
     </div>
   </div>
 </template>
@@ -40,5 +52,27 @@ const authStore = useAuthStore()
   padding: 20px;
   background-color: #f4f4f4;
   color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.google-info,
+.linkedin-info {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.google-info {
+  background-color: #dd4b39;
+  color: #fff;
+}
+
+.linkedin-info {
+  background-color: #0077b5;
+  color: #fff;
 }
 </style>

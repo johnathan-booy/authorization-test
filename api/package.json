@@ -17,6 +17,7 @@
     "knex": "^3.0.1",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "passport-linkedin-oauth2": "github:auth0/passport-linkedin-oauth2",
     "pg": "^8.11.3"
   }
 }
