@@ -12,16 +12,25 @@ interface User {
 export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
-    user: null as User | null
+    user: null as User | null,
+    isUserLoaded: false,
+    isFetchingUser: false
   }),
   actions: {
     async fetchUser() {
+      if (this.isUserLoaded || this.isFetchingUser) {
+        return
+      }
+
+      this.isFetchingUser = true
       try {
         const response = await axios.get<{ user: User }>("http://localhost:3000/user", { withCredentials: true })
         this.user = response.data.user
       } catch (error) {
         this.user = null
       }
+      this.isFetchingUser = false
+      this.isUserLoaded = true
     },
     async logout() {
       try {

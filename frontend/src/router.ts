@@ -39,16 +39,19 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, _from, next) => {
   const authStore = useAuthStore()
+
+  if (!authStore.isUserLoaded && !authStore.isFetchingUser) {
+    await authStore.fetchUser()
+  }
+
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!authStore.user) {
       next({ name: "Login" })
-    } else {
-      next()
+      return
     }
   }
-
   next()
 })
 
