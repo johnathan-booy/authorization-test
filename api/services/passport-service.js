@@ -70,8 +70,9 @@ passport.use(
     function (req, accessToken, refreshToken, profile, done) {
       process.nextTick(async function () {
         try {
+          console.log("LinkedIn profile email: " + JSON.stringify(profile.email))
           if (req.user) {
-            const updatedUser = await User.linkLinkedInAccount(req.user.id, profile.id)
+            const updatedUser = await User.linkLinkedInAccount(req.user, profile.id, profile.email)
             if (!updatedUser) {
               return done(null, false)
             }
@@ -81,6 +82,7 @@ passport.use(
 
             if (!user) {
               user = await User.create({
+                email: profile.email,
                 linkedin_id: profile.id,
                 username: profile.displayName
               })

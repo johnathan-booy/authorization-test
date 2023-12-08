@@ -39,13 +39,19 @@ class User {
     return result[0] || null
   }
 
-  static async linkLinkedInAccount(userId, linkedinId) {
-    if (!userId || !linkedinId) return null
+  static async linkLinkedInAccount(user, linkedinId, email) {
+    if (!user || !linkedinId) return null
 
     const existingLinkedInUser = await this.findByLinkedInId(linkedinId)
     if (existingLinkedInUser) return null
 
-    const result = await knex("users").where({ id: userId }).update({ linkedin_id: linkedinId }).returning("*")
+    const updateData = { linkedin_id: linkedinId }
+
+    if (!user.email) {
+      updateData.email = email
+    }
+
+    const result = await knex("users").where({ id: user.id }).update(updateData).returning("*")
     return result[0] || null
   }
 }

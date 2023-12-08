@@ -7,6 +7,7 @@
 
     <div class="content">
       <p>More information about {{ authStore.user?.username }} here!</p>
+      <p v-if="authStore.user?.email">Email: {{ authStore.user?.email }}</p>
       <p
         class="google-info"
         v-if="authStore.user?.google_id"
