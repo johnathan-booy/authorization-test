@@ -21,24 +21,32 @@ passport.use(
       callbackURL: "/auth/google/redirect",
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      scope: ["profile"]
+      scope: ["profile"],
+      passReqToCallback: true
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (req, accessToken, refreshToken, profile, done) => {
       try {
-        let user = await User.findByGoogleId(profile.id)
-
-        if (!user) {
-          // Create new user if not found
-          user = await User.create({
-            google_id: profile.id,
-            username: profile.displayName
-          })
-          console.log("New user created: " + JSON.stringify(user))
+        if (req.user) {
+          const updatedUser = await User.linkGoogleAccount(req.user.id, profile.id)
+          if (!updatedUser) {
+            return done(null, false)
+          }
+          done(null, updatedUser)
         } else {
-          console.log("Existing user: " + JSON.stringify(user))
-        }
+          let user = await User.findByGoogleId(profile.id)
 
-        done(null, user)
+          if (!user) {
+            user = await User.create({
+              google_id: profile.id,
+              username: profile.displayName
+            })
+            console.log("New google user created: " + JSON.stringify(user))
+          } else {
+            console.log("Existing google user: " + JSON.stringify(user))
+          }
+
+          done(null, user)
+        }
       } catch (error) {
         done(error)
       }
@@ -60,24 +68,29 @@ passport.use(
       state: true
     },
     function (req, accessToken, refreshToken, profile, done) {
-      // asynchronous verification, for effect...
-      req.session.accessToken = accessToken
       process.nextTick(async function () {
         try {
-          let user = await User.findByLinkedInId(profile.id)
-
-          if (!user) {
-            // Create new user if not found
-            user = await User.create({
-              linkedin_id: profile.id,
-              username: profile.displayName
-            })
-            console.log("New user created: " + JSON.stringify(user))
+          if (req.user) {
+            const updatedUser = await User.linkLinkedInAccount(req.user.id, profile.id)
+            if (!updatedUser) {
+              return done(null, false)
+            }
+            return done(null, updatedUser)
           } else {
-            console.log("Existing user: " + JSON.stringify(user))
-          }
+            let user = await User.findByLinkedInId(profile.id)
 
-          return done(null, user)
+            if (!user) {
+              user = await User.create({
+                linkedin_id: profile.id,
+                username: profile.displayName
+              })
+              console.log("New LinkedIn user created: " + JSON.stringify(user))
+            } else {
+              console.log("Existing LinkedIn user: " + JSON.stringify(user))
+            }
+
+            return done(null, user)
+          }
         } catch (error) {
           return done(error)
         }

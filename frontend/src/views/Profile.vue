@@ -11,13 +11,13 @@
         class="google-info"
         v-if="authStore.user?.google_id"
       >
-        Google ID: {{ authStore.user?.google_id }}
+        Google
       </p>
       <p
         class="linkedin-info"
         v-if="authStore.user?.linkedin_id"
       >
-        LinkedIn ID: {{ authStore.user?.linkedin_id }}
+        LinkedIn
       </p>
     </div>
   </div>

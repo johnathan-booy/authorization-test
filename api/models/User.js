@@ -28,6 +28,26 @@ class User {
     const result = await knex("users").insert(newUser).returning("*")
     return result[0] || null
   }
+
+  static async linkGoogleAccount(userId, googleId) {
+    if (!userId || !googleId) return null
+
+    const existingGoogleUser = await this.findByGoogleId(googleId)
+    if (existingGoogleUser) return null
+
+    const result = await knex("users").where({ id: userId }).update({ google_id: googleId }).returning("*")
+    return result[0] || null
+  }
+
+  static async linkLinkedInAccount(userId, linkedinId) {
+    if (!userId || !linkedinId) return null
+
+    const existingLinkedInUser = await this.findByLinkedInId(linkedinId)
+    if (existingLinkedInUser) return null
+
+    const result = await knex("users").where({ id: userId }).update({ linkedin_id: linkedinId }).returning("*")
+    return result[0] || null
+  }
 }
 
 module.exports = User

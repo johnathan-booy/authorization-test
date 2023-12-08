@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
 import Home from "@/views/Home.vue"
 import Profile from "@/views/Profile.vue"
 import Login from "@/views/Login.vue"
+import Connect from "@/views/Connect.vue"
 import { useAuthStore } from "./stores/authStore"
 
 const routes: Array<RouteRecordRaw> = [
@@ -22,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/auth/login",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/connect",
+    name: "Connect",
+    component: Connect
   },
 
   // Add more routes here

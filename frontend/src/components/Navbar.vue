@@ -54,6 +54,12 @@ const navLinks = computed(() => {
       path: "/profile",
       isVisible: isAuthorized.value,
       isActive: activeRoute.path === "/profile"
+    },
+    {
+      name: "Connect",
+      path: "/connect",
+      isVisible: isAuthorized.value,
+      isActive: activeRoute.path === "/connect"
     }
   ]
 })
