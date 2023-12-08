@@ -3,6 +3,7 @@ import Home from "@/views/Home.vue"
 import Profile from "@/views/Profile.vue"
 import Login from "@/views/Login.vue"
 import Connect from "@/views/Connect.vue"
+import EmailLogin from "@/views/EmailLogin.vue"
 import { useAuthStore } from "./stores/authStore"
 
 const routes: Array<RouteRecordRaw> = [
@@ -23,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/auth/login",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/auth/login/magic-link",
+    name: "EmailLogin",
+    component: EmailLogin
   },
   {
     path: "/connect",

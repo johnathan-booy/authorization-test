@@ -11,6 +11,12 @@ class User {
     return result[0] || null
   }
 
+  static async getUserByEmail(email) {
+    if (!email) return null
+    const result = await knex("users").select("*").where({ email: email })
+    return result[0] || null
+  }
+
   static async findByGoogleId(googleId) {
     if (!googleId) return null
     const result = await knex("users").select("*").where({ google_id: googleId })

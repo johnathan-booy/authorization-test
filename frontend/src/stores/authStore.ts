@@ -40,6 +40,22 @@ export const useAuthStore = defineStore({
       } catch (error) {
         console.error("Error logging out:", error)
       }
+    },
+    async sendMagicLink(email: string) {
+      try {
+        await axios.post(
+          "http://localhost:3000/auth/magic-link/send",
+          { email },
+          {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }
+        )
+      } catch (error) {
+        console.error("Error sending magic link:", error)
+        throw error
+      }
     }
   }
 })

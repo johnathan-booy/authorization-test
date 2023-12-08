@@ -101,4 +101,8 @@ passport.use(
   )
 )
 
+// passport.use("custom-magic-link", new CustomStrategy(async function (req, done) {
+//   console.log
+// }))
+
 module.exports = passport

@@ -7,6 +7,12 @@
     <div class="content">
       <div class="oauth-links">
         <a
+          class="email-btn"
+          @click="handleEmailClick()"
+        >
+          Email
+        </a>
+        <a
           class="google-btn"
           href="http://localhost:3000/auth/google"
         >
@@ -26,6 +32,13 @@
 
 <script lang="ts" setup>
 import Navbar from "@/components/Navbar.vue"
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+
+const handleEmailClick = () => {
+  router.push({ name: "EmailLogin" })
+}
 </script>
 
 <style scoped>
@@ -73,6 +86,16 @@ h1 {
 .linkedin-btn {
   display: inline-block;
   background-color: #0077b5;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.email-btn {
+  display: inline-block;
+  background-color: #333;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;

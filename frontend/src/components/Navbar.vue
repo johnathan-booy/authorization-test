@@ -8,7 +8,7 @@
         <li v-if="link.isVisible">
           <a
             :class="{ active: link.isActive }"
-            @click="handleLinkClick(link.path)"
+            @click="handleLinkClick(link.name)"
             >{{ link.name }}</a
           >
         </li>
@@ -39,39 +39,35 @@ const navLinks = computed(() => {
   return [
     {
       name: "Login",
-      path: "/auth/login",
       isVisible: !isAuthorized.value,
-      isActive: activeRoute.path === "/auth/login"
+      isActive: activeRoute.name === "Login"
     },
     {
       name: "Home",
-      path: "/",
       isVisible: true,
-      isActive: activeRoute.path === "/"
+      isActive: activeRoute.name === "Home"
     },
     {
       name: "Profile",
-      path: "/profile",
       isVisible: isAuthorized.value,
-      isActive: activeRoute.path === "/profile"
+      isActive: activeRoute.name === "Profile"
     },
     {
       name: "Connect",
-      path: "/connect",
       isVisible: isAuthorized.value,
-      isActive: activeRoute.path === "/connect"
+      isActive: activeRoute.name === "Connect"
     }
   ]
 })
 
 // Methods
-const handleLinkClick = (path: string) => {
-  router.push(path)
+const handleLinkClick = (name: string) => {
+  router.push({ name })
 }
 
 const handleLogout = async () => {
   await authStore.logout()
-  router.push("/auth/login")
+  router.push({ name: "Login" })
 }
 
 // Lifecycle hooks
