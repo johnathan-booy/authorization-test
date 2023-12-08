@@ -3,7 +3,7 @@ const cors = require("cors")
 const express = require("express")
 const authRoutes = require("./routes/auth-routes")
 const userRoutes = require("./routes/user-routes")
-const passport = require("./config/passport-setup")
+const passport = require("./services/passport-service")
 const session = require("express-session")
 
 const app = express()
