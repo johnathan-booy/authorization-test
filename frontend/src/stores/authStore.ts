@@ -56,6 +56,26 @@ export const useAuthStore = defineStore({
         console.error("Error sending magic link:", error)
         throw error
       }
+    },
+    async signUp(name: string, email: string) {
+      try {
+        await axios.post(
+          "http://localhost:3000/user",
+          { username: name, email },
+          {
+            headers: {
+              "Content-Type": "application/json"
+            },
+            withCredentials: true
+          }
+        )
+
+        // Fetch the user to set the user state
+        await this.fetchUser()
+      } catch (error) {
+        console.error("Error signing up:", error)
+        throw error
+      }
     }
   }
 })

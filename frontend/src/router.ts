@@ -4,6 +4,7 @@ import Profile from "@/views/Profile.vue"
 import Login from "@/views/Login.vue"
 import Connect from "@/views/Connect.vue"
 import EmailLogin from "@/views/EmailLogin.vue"
+import SignUp from "@/views/SignUp.vue"
 import { useAuthStore } from "./stores/authStore"
 
 const routes: Array<RouteRecordRaw> = [
@@ -19,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: "/auth/signup",
+    name: "SignUp",
+    component: SignUp
   },
   {
     path: "/auth/login",

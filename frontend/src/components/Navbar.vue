@@ -38,6 +38,11 @@ const isAuthorized = computed(() => {
 const navLinks = computed(() => {
   return [
     {
+      name: "SignUp",
+      isVisible: !isAuthorized.value,
+      isActive: activeRoute.name === "SignUp"
+    },
+    {
       name: "Login",
       isVisible: !isAuthorized.value,
       isActive: activeRoute.name === "Login"
