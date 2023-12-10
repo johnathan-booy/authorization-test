@@ -34,9 +34,7 @@
 import Navbar from "@/components/Navbar.vue"
 import { useAuthStore } from "@/stores/authStore"
 import { ref } from "vue"
-import { useRouter } from "vue-router"
 
-const router = useRouter()
 const authStore = useAuthStore()
 const email = ref("")
 const name = ref("")
@@ -55,7 +53,8 @@ const handleNameInput = (e: any) => {
 const handleSubmit = async () => {
   try {
     await authStore.signUp(name.value, email.value)
-    router.push({ name: "Profile" })
+    // Hard redirect to profile page after successful sign up
+    window.location.href = "/profile"
   } catch (err) {
     errorMessage.value = "Oops! Something went wrong. Please try again."
   }
