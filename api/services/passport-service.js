@@ -1,7 +1,9 @@
 const passport = require("passport")
 const GoogleStrategy = require("passport-google-oauth20").Strategy
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy
+const CustomStrategy = require("passport-custom").Strategy
 const User = require("../models/user")
+const AuthenticationService = require("../services/authentication-service")
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
@@ -101,8 +103,36 @@ passport.use(
   )
 )
 
-// passport.use("custom-magic-link", new CustomStrategy(async function (req, done) {
-//   console.log
-// }))
+passport.use(
+  "custom-magic-link",
+  new CustomStrategy(async function (req, done) {
+    const authKey = req.headers.authorization.split(" ")[1]
+
+    if (!authKey) {
+      console.warn("No authKey provided")
+      return done(null, false)
+    }
+
+    // Verify JWT
+    const payload = AuthenticationService.verifyToken(authKey)
+
+    // if JWT is invalid or expired, we don't want to log the user in
+    if (!payload) {
+      console.warn("Invalid JWT")
+      return done(null, false)
+    }
+
+    // if JWT is valid, we want to find the user and log them in
+    const user = await User.findById(payload.id)
+
+    if (!user) {
+      console.warn("User not found")
+      return done(null, false)
+    }
+
+    console.info("User logged in with magic link: " + user.id + " " + user.email)
+    return done(null, user)
+  })
+)
 
 module.exports = passport

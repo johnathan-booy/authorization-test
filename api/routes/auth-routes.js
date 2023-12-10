@@ -49,4 +49,8 @@ router.post("/magic-link/send", async function (req, res) {
   })
 })
 
+router.get("/magic-link/verify", passport.authenticate("custom-magic-link"), (req, res) => {
+  res.json({ message: "Magic link verified." })
+})
+
 module.exports = router

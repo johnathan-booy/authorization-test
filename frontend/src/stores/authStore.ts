@@ -69,11 +69,23 @@ export const useAuthStore = defineStore({
             withCredentials: true
           }
         )
-
-        // Fetch the user to set the user state
-        await this.fetchUser()
       } catch (error) {
         console.error("Error signing up:", error)
+        throw error
+      }
+    },
+    async verifyMagicLink(authKey: string) {
+      try {
+        await axios.get("http://localhost:3000/auth/magic-link/verify", {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${authKey}`,
+            "Content-Type": "application/json"
+          },
+          withCredentials: true
+        })
+      } catch (error) {
+        console.error("Error verifying magic link:", error)
         throw error
       }
     }

@@ -37,6 +37,16 @@ const routes: Array<RouteRecordRaw> = [
     component: EmailLogin
   },
   {
+    path: "/magic-link",
+    name: "MagicLink",
+    redirect() {
+      return {
+        name: "Profile",
+        query: {}
+      }
+    }
+  },
+  {
     path: "/connect",
     name: "Connect",
     component: Connect
@@ -57,20 +67,14 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (to, _from, next) => {
+router.beforeEach((to, _from, next) => {
   const authStore = useAuthStore()
 
-  if (!authStore.isUserLoaded && !authStore.isFetchingUser) {
-    await authStore.fetchUser()
+  if (to.matched.some((record) => record.meta.requiresAuth) && !authStore.user) {
+    next({ name: "Login" })
+  } else {
+    next()
   }
-
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!authStore.user) {
-      next({ name: "Login" })
-      return
-    }
-  }
-  next()
 })
 
 export default router
