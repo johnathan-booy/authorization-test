@@ -44,13 +44,13 @@ Set up your PostgreSQL database and update the .env file with the appropriate cr
 Run Knex migrations:
 
 ```bash
-npx knex migrate:latest
+npm run migrate
 ```
 
 Start the backend server on `localhost:3000`:
 
 ```bash
-nodemon app.js
+npm run dev
 ```
 
 ### Step 3: Start the Frontend

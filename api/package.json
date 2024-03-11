@@ -4,7 +4,8 @@
   "description": "Course files for The Net Ninja OAuth playlist on YouTube",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app.js",
+    "migrate": "npx knex migrate:latest"
   },
   "author": "",
   "license": "ISC",
