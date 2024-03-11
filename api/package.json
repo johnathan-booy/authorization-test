@@ -23,5 +23,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-linkedin-oauth2": "github:auth0/passport-linkedin-oauth2",
     "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }
