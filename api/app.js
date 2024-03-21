@@ -7,6 +7,7 @@ const passport = require("./services/passport-service")
 const session = require("express-session")
 
 const app = express()
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 
@@ -33,6 +34,6 @@ app.use(passport.session())
 app.use("/auth", authRoutes)
 app.use("/user", userRoutes)
 
-app.listen(3000, () => {
-  console.log("app listening on port 3000!")
+app.listen(port, () => {
+  console.log(`app listening on port ${port}!`)
 })
