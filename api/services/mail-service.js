@@ -23,7 +23,7 @@ module.exports = class MailService {
       from: "example@gmail.com",
       to: user.email,
       subject: "TEST Magic Signin Link",
-      template: "magic-signin-link-2",
+      template: "magic-signin-link",
       "h:X-Mailgun-Variables": JSON.stringify({
         magic_link: magicLink,
         user_name: user.username
