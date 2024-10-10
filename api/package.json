@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Course files for The Net Ninja OAuth playlist on YouTube",
   "main": "app.js",
+  "engines": {
+    "node": ">=20.0.0 <21.0.0"
+  },
   "scripts": {
     "dev": "nodemon app.js",
     "migrate": "npx knex migrate:latest"

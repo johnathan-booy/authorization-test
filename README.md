@@ -31,6 +31,12 @@ Change to the backend directory:
 cd api
 ```
 
+Ensure that you are using the correct version of Node.js:
+
+```bash
+nvm use
+```
+
 Install the necessary node modules:
 
 ```bash
@@ -59,6 +65,12 @@ In a separate terminal, navigate to the frontend directory:
 
 ```bash
 cd ../frontend
+```
+
+Ensure that you are using the correct version of Node.js:
+
+```bash
+nvm use
 ```
 
 Install the necessary node modules:
